@@ -10,9 +10,9 @@ export class BaseTableModel extends Model<BaseTableModel> {
   updatedAt?: Date
 
   @Column(DataType.STRING)
-  createdBy: String
+  createdBy?: String
 
   @Column(DataType.STRING)
-  updatedBy: String
+  updatedBy?: String
   
 }
