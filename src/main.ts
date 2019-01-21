@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import { AppRouter } from './utils/router_utils'
 import { DefaultConfig } from './config'
 import Routes from './routes'
-import SequelizeConnector from '../database/utils/sequelize_connector'
+import SequelizeConnector from './utils/sequelize_connector'
 
 SequelizeConnector.subscribe(
   () => console.log('database connected !'), 

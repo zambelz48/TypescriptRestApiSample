@@ -8,8 +8,6 @@ const saveUser = (request: Request) => {
   const reqBody = request.body
   const service: UserService = container.resolve(UserDefaultService)
 
-  console.log('request body', reqBody)
-
   return service.saveUser({
     username: reqBody['username'],
     password: reqBody['password']

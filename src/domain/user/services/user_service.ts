@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe'
-import { UserTableModel } from '../../../../database/models/user_table_model'
+import { UserTableModel } from '../models/user_table_model'
 import { Observable, defer, of } from 'rxjs'
 import { map, catchError } from 'rxjs/operators'
 import { BaseResponse } from '../../../utils/base_response'

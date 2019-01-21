@@ -1,7 +1,7 @@
 import { RouteSpec } from './utils/router_utils'
 import UserDomainRoutes from './domain/user/routes'
 
-const registeredRoutes: RouteSpec[] = new Array()
+const registeredRoutes: RouteSpec<any>[] = new Array()
 
 const registerRoutes = (routes: any) => {
   routes.forEach((route: any) => {
