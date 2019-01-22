@@ -2,19 +2,19 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('tbl_user', {
+    return queryInterface.createTable('tbl_profile', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING,
+      fullname: {
+        type: Sequelize.STRING(100),
         allowNull: false
       },
-      password: {
-        type: Sequelize.STRING,
+      address: {
+        type: Sequelize.TEXT,
         allowNull: false
       },
       createdAt: {
@@ -26,16 +26,16 @@ module.exports = {
         allowNull: true
       },
       createdBy: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(32),
         allowNull: true
       },
       updatedBy: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(32),
         allowNull: true
       }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('tbl_user')
+    return queryInterface.dropTable('tbl_profile')
   }
 }
