@@ -2,7 +2,7 @@
   "name": "playgamerecruitmenttest",
   "version": "1.0.0",
   "description": "Simple Banking System For Playgame Recruitment Process",
-  "main": "dits/main.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
