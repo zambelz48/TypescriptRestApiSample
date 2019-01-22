@@ -13,14 +13,15 @@ registerDependencies([
   UserDomainDependencies
 ])
 
-SequelizeConnector.subscribe(
-  () => console.log('database connected !'), 
-  (error) => console.log('database connection failure:', error)
-)
+SequelizeConnector.subscribe(() => { 
+  console.log('database connected !') 
+}, (error) => { 
+  console.log('database connection failure:', error) 
+})
 
 const defaultExpress = express()
 
-var cors = require('cors')
+const cors = require('cors')
 defaultExpress.use(cors())
 
 defaultExpress.use(bodyParser.urlencoded({

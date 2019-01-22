@@ -11,7 +11,7 @@ export class ErrorResponse {
 
 export class BaseResponse<T> {
   status: ResponseStatus = ResponseStatus.SUCCESS
-  error?: ErrorResponse = null
+  error?: ErrorResponse = undefined
   response?: T
 }
 
@@ -19,7 +19,7 @@ export function createSuccessResponse<T>(response: T): BaseResponse<T> {
 
   const result = new BaseResponse<T>()
   result.status = ResponseStatus.SUCCESS
-  result.error = null
+  result.error = undefined
   result.response = response
 
   return result
@@ -30,7 +30,7 @@ export function createErrorResponse<T>(errorResponse: ErrorResponse): BaseRespon
   const result = new BaseResponse<T>()
   result.status = ResponseStatus.FAILED
   result.error = errorResponse
-  result.response = null
+  result.response = undefined
 
   return result
 }

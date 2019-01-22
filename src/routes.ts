@@ -14,7 +14,7 @@ const registerRoutes = (routes: any) => {
   })
 }
 
-var userDomainRoutes = require('./domain/user/routes')
+const userDomainRoutes = require('./domain/user/routes')
 
 registerRoutes([ 
   userDomainRoutes 
