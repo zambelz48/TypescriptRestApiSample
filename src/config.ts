@@ -1,4 +1,4 @@
-import { ConfigTemplate } from './utils/router_utils'
+import { ConfigTemplate } from './utils/core/router_utils'
 
 export class DefaultConfig implements ConfigTemplate {
   PORT: Number = 4848
