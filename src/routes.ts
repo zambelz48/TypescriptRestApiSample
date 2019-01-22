@@ -1,4 +1,4 @@
-import { RouteSpec } from './utils/core/router_utils'
+import { RouteSpec } from './utils/core/app_engine'
 import userDomainRoutes from './domain/user/routes'
 import profileDomainRoutes from './domain/profile/routes'
 

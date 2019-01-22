@@ -1,13 +1,18 @@
 import { from, Observable } from 'rxjs'
 import { distinctUntilChanged } from 'rxjs/operators'
-import { Application, PathParams, Response, NextFunction, Request, RequestHandler } from 'express-serve-static-core'
+import { Application, PathParams, Response, NextFunction, Request } from 'express-serve-static-core'
+import { registerDependencies } from './dependency_resolver'
 
 export enum HttpMethod {
   GET, POST, PUT, PATCH, DELETE
 }
 
 export interface ConfigTemplate {
+
   PORT: Number
+
+  appDependencies: any[]
+
 }
 
 export class RouteSpec<T> {
@@ -22,9 +27,9 @@ export class RouteSpec<T> {
   }
 }
 
-export class AppRouter {
+export class AppEngine {
 
-  private static instance: AppRouter
+  private static instance: AppEngine
 
   private app: Application
   private config: ConfigTemplate
@@ -33,18 +38,20 @@ export class AppRouter {
     this.app = app
   }
 
-  static createUsing(app: Application): AppRouter {
+  static createUsing(app: Application): AppEngine {
 
-    if (!AppRouter.instance) {
-      AppRouter.instance = new AppRouter(app)
+    if (!AppEngine.instance) {
+      AppEngine.instance = new AppEngine(app)
     }
 
-    return AppRouter.instance
+    return AppEngine.instance
   }
 
-  configureWith(config: ConfigTemplate): AppRouter {
+  configureWith(config: ConfigTemplate): AppEngine {
 
     this.config = config
+
+    registerDependencies(config.appDependencies)
     
     return this
   }

@@ -1,4 +1,4 @@
-import { HttpMethod, RouteSpec } from '../../utils/core/router_utils'
+import { HttpMethod, RouteSpec } from '../../utils/core/app_engine'
 import * as profileController from './services/controllers/profile_controller'
 
 export default [
