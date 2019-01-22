@@ -1,15 +1,8 @@
 
 import { Observable } from 'rxjs'
 import { BaseResponse } from '../../../../utils/models/base_response'
-
-export class UserRequestParams {
-  username: String
-  password: String
-}
-
-export class UserResponse {
-  username: String
-}
+import { UserRequestParams } from '../../models/user_request_model'
+import { UserResponse } from '../../models/user_response_model'
 
 export const UserServiceTokenName = 'UserService'
 export interface UserService {

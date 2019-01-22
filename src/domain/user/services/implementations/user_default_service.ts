@@ -3,7 +3,9 @@ import { Observable, defer, of } from 'rxjs'
 import { map, catchError } from 'rxjs/operators'
 import { BaseResponse, createErrorResponse, createSuccessResponse } from '../../../../utils/models/base_response'
 import { UserTableModel } from '../../models/user_table_model'
-import { UserService, UserRequestParams, UserResponse } from '../interfaces/user_service'
+import { UserRequestParams } from '../../models/user_request_model'
+import { UserResponse } from '../../models/user_response_model'
+import { UserService } from '../interfaces/user_service'
 
 @injectable()
 export class UserDefaultService implements UserService {
