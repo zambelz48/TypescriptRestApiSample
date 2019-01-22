@@ -18,13 +18,13 @@ const sequelize = new Sequelize({
   password: config.password,
 })
 
-const tabelModels = [
+const tableModels = [
   ProfileTableModel, 
   AccountTableModel, 
   UserTableModel
 ]
 const modelsRegistration = (async () => {
-  await sequelize.addModels(tabelModels)
+  await sequelize.addModels(tableModels)
 })()
 
 const connectionObservable = from(sequelize.authenticate())

@@ -1,5 +1,5 @@
-import { from, Observable } from 'rxjs'
-import { distinctUntilChanged } from 'rxjs/operators'
+import { from, Observable, Subject, of } from 'rxjs'
+import { distinctUntilChanged, map, flatMap } from 'rxjs/operators'
 import { Application, PathParams, Response, NextFunction, Request } from 'express-serve-static-core'
 import { registerDependencies } from './dependency_resolver'
 
@@ -32,10 +32,14 @@ export class AppEngine {
   private static instance: AppEngine
 
   private app: Application
-  private config: ConfigTemplate
+  private configObservable = new Subject<ConfigTemplate>()
+  private routeObservable = new Subject<RouteSpec<any>[]>()
 
   private constructor(app: Application) {
+
     this.app = app
+
+    this.bindObservables()
   }
 
   static createUsing(app: Application): AppEngine {
@@ -49,32 +53,40 @@ export class AppEngine {
 
   configureWith(config: ConfigTemplate): AppEngine {
 
-    this.config = config
+    this.configObservable.next(config)
 
-    registerDependencies(config.appDependencies)
-    
     return this
   }
 
   handle(routes: RouteSpec<any>[]) {
 
-    from(routes)
-      .pipe(distinctUntilChanged())
-      .subscribe((route: RouteSpec<any>) => this.handleRoute(route))
+    this.routeObservable.next(routes)
 
-      this.listen()
   }
 
-  private listen() {
+  private bindObservables() {
 
-    if (!this.config) {
-      return
-    }
+    this.configObservable.asObservable()
+      .pipe(distinctUntilChanged())
+      .subscribe(config => {
+        
+        registerDependencies(config.appDependencies)
 
-    const PORT = this.config.PORT
-    this.app.listen(PORT, () => {
-      console.log(`server running on port ${PORT}`)
-    })
+        this.app.listen(config.PORT, () => {
+          console.log(`server running on port ${config.PORT}`)
+        })
+      }, error => {
+        console.log('server error', error)
+      })
+
+    this.routeObservable.asObservable()
+      .pipe(distinctUntilChanged())
+      .pipe(flatMap(routes => from(routes)))
+      .subscribe(route => {
+        this.handleRoute(route)
+      }, error => {
+        console.log('routes handling failed', error)
+      })
   }
 
   private handleRoute(route: RouteSpec<any>) {
