@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "850664c5-76c0-440c-b356-04b0d4f88d7d",
+		"name": "PlaygameTestEndpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"fullname\": \"Bang karni\",\n\t\"address\": \"Tolong kami\",\n\t\"phone\": \"09999999999\",\n\t\"email\": \"bang@karni.com\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4848/api/profile/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4848",
+					"path": [
+						"api",
+						"profile",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer <replace_with_token_from_login_result>",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"profileId\": 3\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4848/api/profile/detail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4848",
+					"path": [
+						"api",
+						"profile",
+						"detail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Profile List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer <replace_with_token_from_login_result>",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4848/api/profile/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4848",
+					"path": [
+						"api",
+						"profile",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"profileId\": 3,\n\t\"username\": \"karni\",\n\t\"password\": \"karni\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4848/api/user/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4848",
+					"path": [
+						"api",
+						"user",
+						"save"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"karni\",\n\t\"password\": \"karni\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4848/api/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4848",
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bank Account Detail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer <replace_with_token_from_login_result>"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"accountNumber\": \"12345678\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4848/api/account/detail",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4848",
+					"path": [
+						"api",
+						"account",
+						"detail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Bank Account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer <replace_with_token_from_login_result>",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"accountId\": 0,\n\t\"profileId\": 3,\n\t\"accountNumber\": \"123456\",\n\t\"balance\": \"12000000\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:4848/api/account/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4848",
+					"path": [
+						"api",
+						"account",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
