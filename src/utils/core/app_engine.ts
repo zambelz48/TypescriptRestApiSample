@@ -1,7 +1,8 @@
-import { from, Observable, Subject, of } from 'rxjs'
-import { distinctUntilChanged, map, flatMap } from 'rxjs/operators'
+import { from, Observable, Subject, of, never } from 'rxjs'
+import { distinctUntilChanged, map, flatMap, switchMap } from 'rxjs/operators'
 import { Application, PathParams, Response, NextFunction, Request } from 'express-serve-static-core'
 import { registerDependencies } from './dependency_resolver'
+import { validateJWTToken } from './jwt_utils'
 
 export enum HttpMethod {
   GET, POST, PUT, PATCH, DELETE
@@ -17,11 +18,13 @@ export interface ConfigTemplate {
 
 export class RouteSpec<T> {
   method: HttpMethod
+  secure: Boolean
   endpoint: PathParams
   observable: (request: Request) => Observable<T>
 
-  constructor(method: HttpMethod, endpoint: PathParams, observable: (request: Request) => Observable<T>) {
+  constructor(method: HttpMethod, secure: Boolean, endpoint: PathParams, observable: (request: Request) => Observable<T>) {
     this.method = method
+    this.secure = secure
     this.endpoint = endpoint
     this.observable = observable
   }
@@ -92,8 +95,23 @@ export class AppEngine {
   private handleRoute(route: RouteSpec<any>) {
 
     const method = route.method
+    const isSecure = route.secure
     const path = route.endpoint
-    const observable = (request: Request) => route.observable(request)
+
+    const observable = (request: Request) => {
+      
+      if (!isSecure) { 
+        return route.observable(request) 
+      }
+
+      return validateJWTToken(request)
+        .pipe(map(result => {
+          if (result) {
+            return switchMap(() => route.observable(request))
+          }
+          return never
+        }))
+    }
 
     switch (method) {
       case HttpMethod.GET:
