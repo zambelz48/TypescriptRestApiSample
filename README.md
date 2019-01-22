@@ -1,5 +1,3 @@
-# How To's
-
 ## Project setup
 - install npm packages by run command `npm install`
 - open `database/config/config.js` to configure database configuration
