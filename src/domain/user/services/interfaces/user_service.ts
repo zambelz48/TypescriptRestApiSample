@@ -1,10 +1,14 @@
 
 import { Observable } from 'rxjs'
 import { BaseResponse } from '../../../../utils/models/base_response'
-import { UserRequestParams } from '../../models/user_request_model'
-import { UserResponse } from '../../models/user_response_model'
+import { UserSaveRequestParams, UserLoginRequestParams } from '../../models/user_request_model'
+import { UserResponse, UserLoginResponse } from '../../models/user_response_model'
 
 export const UserServiceTokenName = 'UserService'
 export interface UserService {
-  saveUser(params: UserRequestParams): Observable<BaseResponse<UserResponse>>
+
+  saveUser(params: UserSaveRequestParams): Observable<BaseResponse<UserResponse>>
+
+  login(params: UserLoginRequestParams): Observable<BaseResponse<UserLoginResponse>>
+
 }

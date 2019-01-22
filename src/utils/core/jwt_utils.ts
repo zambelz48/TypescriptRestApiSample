@@ -14,13 +14,15 @@ class JWTClaimModel {
 
 export const generateJWTToken = (email: String) => {
 
+  const createdDate = new Date()
+
   const payload: JWTClaimModel = {
     sub: email,
-    iat: 1,
-    exp: 1
+    iat: createdDate.getTime(),
+    exp: createdDate.setDate(createdDate.getDate() + 1)
   }
 
-  return jwt.sign(payload, secretKey, options)
+  return jwt.sign(payload, secretKey)
 }
 
 export function validateJWTToken(request: Request): Observable<Boolean> {

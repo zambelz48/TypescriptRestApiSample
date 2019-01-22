@@ -107,10 +107,11 @@ export class AppEngine {
       return validateJWTToken(request)
         .pipe(map(result => {
           if (result) {
-            return switchMap(() => route.observable(request))
+            return result
           }
           return never
         }))
+        .pipe(switchMap(() => route.observable(request)))
     }
 
     switch (method) {
