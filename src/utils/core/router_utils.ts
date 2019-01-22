@@ -84,7 +84,7 @@ export class AppRouter {
         break
 
       case HttpMethod.POST:
-        this.app.get(path, (request: Request, response: Response, next: NextFunction) => { 
+        this.app.post(path, (request: Request, response: Response, next: NextFunction) => { 
           this.handleRequest(observable(request), response) 
         })
         break

@@ -1,4 +1,6 @@
 import { RouteSpec } from './utils/core/router_utils'
+import userDomainRoutes from './domain/user/routes'
+import profileDomainRoutes from './domain/profile/routes'
 
 const registeredRoutes: RouteSpec<any>[] = new Array()
 const registerRoutes = (routes: any) => {
@@ -14,10 +16,9 @@ const registerRoutes = (routes: any) => {
   })
 }
 
-const userDomainRoutes = require('./domain/user/routes')
-
 registerRoutes([ 
-  userDomainRoutes 
+  userDomainRoutes,
+  profileDomainRoutes
 ])
 
 export default registeredRoutes
